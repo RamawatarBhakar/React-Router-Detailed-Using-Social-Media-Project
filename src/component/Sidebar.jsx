@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Sidebar = ({ page, setSelectPage }) => {
   return (
     <>
@@ -17,35 +18,20 @@ const Sidebar = ({ page, setSelectPage }) => {
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
           <li className="nav-item">
-            <a
-              href="#"
-              className={`nav-link text-white  ${page === "home" && "active"}`}
-              aria-current="page"
-              onClick={() => {
-                setSelectPage("home");
-              }}
-            >
+            <Link to="/" className="nav-link text-white " aria-current="page">
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#home"></use>
               </svg>
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
-              className={`nav-link text-white  ${
-                page === "Create Post" && "active"
-              }`}
-              onClick={() => {
-                setSelectPage("Create Post");
-              }}
-            >
+            <Link to="create-post" className="nav-link text-white ">
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#speedometer2"></use>
               </svg>
               Create Post
-            </a>
+            </Link>
           </li>
         </ul>
         <hr />

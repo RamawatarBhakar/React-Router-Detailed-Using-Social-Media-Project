@@ -12,7 +12,7 @@ export const useActionState = (currents, action) => {
   let items = currents;
 
   if (action.type === "ADD") {
-    items = [...currents, action.payload.post];
+    items = [action.payload.post, ...currents];
   } else if (action.type === "ADD-ApiPost") {
     items = action.payload.Post;
   } else if (action.type === "DELETE") {
@@ -55,22 +55,6 @@ const PostListProvider = ({ children }) => {
     dispatch(deleteItemAction);
   };
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    fetch("https://dummyjson.com/posts", { signal })
-      .then((res) => res.json())
-      .then((data) => {
-        initialPosts(data.posts);
-        setFetching(true);
-      });
-
-    return () => {
-      console.log("cleanup .... ");
-      controller.abort();
-    };
-  }, []);
   return (
     <Postlist.Provider value={{ datas, add, deletes, fetching }}>
       {children}
