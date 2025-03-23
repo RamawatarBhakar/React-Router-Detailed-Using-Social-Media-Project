@@ -1,54 +1,21 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { Postlist } from "../Store/store";
-import { useNavigate } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 
 const CreatePost = () => {
-  const navigate = useNavigate();
-  const { add } = useContext(Postlist);
-  const postid = useRef();
-  const postTitle = useRef();
-  const postBody = useRef();
-  const postView = useRef();
-  const posttag = useRef();
+  // const { add } = useContext(Postlist);
 
-  const adds = (event) => {
-    event.preventDefault();
+  // const adds = (event) => {
+  //   event.preventDefault();
 
-    const body = postBody.current.value;
-    const userId = postid.current.value;
-    const title = postTitle.current.value;
-    const views = postView.current.value;
-    const tags = posttag.current.value
-      .split(",") // Convert string to an array
-      .map((tag) => tag.trim()) // Remove extra spaces
-      .filter((tag) => tag.length > 0); // Remove empty tags
-
-    posttag.current.value = "";
-    postView.current.value = "";
-    postTitle.current.value = "";
-    postid.current.value = "";
-    postBody.current.value = "";
-
-    fetch("https://dummyjson.com/posts/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId,
-        title,
-        body,
-        views,
-        tags, // Now it's an array
-      }),
-    })
-      .then((res) => res.json())
-      .then((resobj) => {
-        add(resobj);
-        navigate("/");
-      });
-  };
+  //   const tags = posttag.current.value
+  //     .split(",") // Convert string to an array
+  //     .map((tag) => tag.trim()) // Remove extra spaces
+  //     .filter((tag) => tag.length > 0); // Remove empty tags
+  // };
 
   return (
-    <form onSubmit={adds}>
+    <Form method="POST" action="">
       <div className="contain">
         <div className="col-md-6">
           <label htmlFor="userId" className="form-label">
@@ -58,47 +25,32 @@ const CreatePost = () => {
             type="text"
             className="form-control"
             id="userId"
-            ref={postid}
+            name="userId"
           />
         </div>
         <div className="col-md-6">
           <label htmlFor="title" className="form-label">
             Title
           </label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            ref={postTitle}
-          />
+          <input type="text" className="form-control" id="title" name="title" />
         </div>
         <div className="col-12">
           <label htmlFor="body" className="form-label">
             Body
           </label>
-          <input
-            type="text"
-            className="form-control"
-            id="body"
-            ref={postBody}
-          />
+          <input type="text" className="form-control" id="body" name="body" />
         </div>
         <div className="col-12">
           <label htmlFor="tags" className="form-label">
             Tags (comma-separated)
           </label>
-          <input type="text" className="form-control" id="tags" ref={posttag} />
+          <input type="text" className="form-control" id="tags" name="tags" />
         </div>
         <div className="col-md-1">
           <label htmlFor="views" className="form-label">
             Views
           </label>
-          <input
-            type="text"
-            className="form-control"
-            id="views"
-            ref={postView}
-          />
+          <input type="text" className="form-control" id="views" name="views" />
         </div>
 
         <div className="col-12">
@@ -107,8 +59,25 @@ const CreatePost = () => {
           </button>
         </div>
       </div>
-    </form>
+    </Form>
   );
 };
 
 export default CreatePost;
+
+export async function createPostAction(data) {
+  const formData = await data.request.formData();
+  const postData = Object.fromEntries(formData);
+  postData.tags = postData.tags.split(" ");
+  console.log(postData);
+  fetch("https://dummyjson.com/posts/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(postData),
+  })
+    .then((res) => res.json())
+    .then((resobj) => {
+      console.log(resobj);
+    });
+  return redirect("/");
+}
