@@ -1,12 +1,35 @@
-# React + Vite
+A social media project built with React Router v6, showcasing dynamic routing, protected routes, and nested routes for smooth navigation.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+📌 Features
+✅ Client-Side Routing – Fast navigation without page reloads.
+✅ Dynamic Routing – Profile pages, posts, and feeds update via URL parameters.
+✅ Protected Routes – Restrict access based on authentication.
+✅ Nested Routes – Well-structured navigation for better UX.
 
-Currently, two official plugins are available:
+🛠 Tech Stack
+🔹 React.js
+🔹 React Router v6
+🔹 Context API
+🔹 Node.js (Backend)
+🔹 CSS for styling
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Installation
+1️⃣ Clone the repo:
 
-## Expanding the ESLint configuration
+sh
+Copy
+Edit
+git clone https://github.com/yourusername/React-Router-Detailed-Using-Social-Media-Project.git
+2️⃣ Install dependencies:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+sh
+Copy
+Edit
+npm install
+3️⃣ Start the project:
+
+sh
+Copy
+Edit
+npm start
+Happy coding! 💻✨
