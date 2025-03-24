@@ -8,12 +8,6 @@ const CreatePost = () => {
   // const adds = (event) => {
   //   event.preventDefault();
 
-  //   const tags = posttag.current.value
-  //     .split(",") // Convert string to an array
-  //     .map((tag) => tag.trim()) // Remove extra spaces
-  //     .filter((tag) => tag.length > 0); // Remove empty tags
-  // };
-
   return (
     <Form method="POST" action="">
       <div className="contain">
@@ -69,15 +63,14 @@ export async function createPostAction(data) {
   const formData = await data.request.formData();
   const postData = Object.fromEntries(formData);
   postData.tags = postData.tags.split(" ");
-  console.log(postData);
+
   fetch("https://dummyjson.com/posts/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(postData),
   })
     .then((res) => res.json())
-    .then((resobj) => {
-      console.log(resobj);
-    });
+    .then((resobj) => {});
+
   return redirect("/");
 }
